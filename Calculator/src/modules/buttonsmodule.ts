@@ -7,31 +7,59 @@ let inputValue: string = '';
 let isFirstInput: boolean = true;
 
 
+
 buttonNodes.forEach(button => {
     button.addEventListener('click', (e) => {
-        if (e) {
-            inputValue = (e.target as HTMLButtonElement).value;
-            if (inputValue === '+') {
+        inputValue = (e.target as HTMLButtonElement).value;
+
+        if (isFirstInput && !isNaN(Number(inputValue))) { 
+            setFirstInputValue(inputValue);
+            console.log(`First input: ${firstInput}`)
+        }
+        else if (!isFirstInput && !isNaN(Number(inputValue))) {
+            setSecondInputValue(inputValue);
+              console.log(`Second input: ${secondInput}`)
+        }
+ 
+
+        //Cases for calculation methods
+        switch (inputValue) {
+            case '=': 
+                isFirstInput = true;
+                calculateResult();
+                break;
+
+            case '+': 
                 setCalculationMethodValue(inputValue);
                 console.log(` calculation method is ${calculationMethod}`)
                 isFirstInput = false;
-            }
+                break;
 
-            else if (inputValue === '=') {
-                isFirstInput = true;
-                calculateResult();
-            }
+            case '-': 
+                setCalculationMethodValue(inputValue);
+                console.log(` calculation method is ${calculationMethod}`)
+                isFirstInput = false;
+                break;
 
-            else if (isFirstInput) {
-                setFirstInputValue(inputValue);
-                console.log(`first input is ${firstInput}`);
-            }
+            case 'x': 
+                setCalculationMethodValue(inputValue);
+                console.log(` calculation method is ${calculationMethod}`)
+                isFirstInput = false;
+                break;
+  
+            case '÷': 
+                setCalculationMethodValue(inputValue);
+                console.log(` calculation method is ${calculationMethod}`)
+                isFirstInput = false;
+                break;
 
-            else {
-                setSecondInputValue(inputValue);
-                console.log(`second input is ${secondInput}`);
-            }   
+            case '√': 
+                setCalculationMethodValue(inputValue);
+                console.log(` calculation method is ${calculationMethod}`)
+                isFirstInput = false;
+                break; 
+            }
             updateDisplay(); 
         }
-    }
-)});
+    )
+});
