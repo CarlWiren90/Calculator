@@ -13,9 +13,9 @@ export const setSecondInputValue = (value: string) => {
 }
 
 export const setCalculationMethodValue = (value: string) => {
-    calculationMethod += value;
+    calculationMethod = value;
 }
 
 export const setResultValue = (value: string) => {
-    result += value;
+    result = value;
 }

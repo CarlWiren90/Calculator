@@ -1,6 +1,7 @@
 import { updateDisplay } from "./displaymodule";
 import { firstInput, secondInput, calculationMethod, setFirstInputValue, setSecondInputValue, setCalculationMethodValue } from "./globalState";
 import { calculateResult } from "./calculationmodule";
+import { numbers } from "./displaymodule";
 
 const buttonNodes:NodeList = document.querySelectorAll('.button');
 let inputValue: string = '';
@@ -28,36 +29,28 @@ buttonNodes.forEach(button => {
                 isFirstInput = true;
                 calculateResult();
                 break;
+ 
+            case 'C': 
+                setFirstInputValue('');
+                setSecondInputValue('');
+                setCalculationMethodValue('');
+                numbers.innerHTML = '';
+                isFirstInput = true;
+                console.log(firstInput)
+                console.log(secondInput)
 
-            case '+': 
+                break;     
+
+            case '+':
+            case '-':
+            case 'x':
+            case '÷':
+            case '√':
                 setCalculationMethodValue(inputValue);
                 console.log(` calculation method is ${calculationMethod}`)
                 isFirstInput = false;
                 break;
 
-            case '-': 
-                setCalculationMethodValue(inputValue);
-                console.log(` calculation method is ${calculationMethod}`)
-                isFirstInput = false;
-                break;
-
-            case 'x': 
-                setCalculationMethodValue(inputValue);
-                console.log(` calculation method is ${calculationMethod}`)
-                isFirstInput = false;
-                break;
-  
-            case '÷': 
-                setCalculationMethodValue(inputValue);
-                console.log(` calculation method is ${calculationMethod}`)
-                isFirstInput = false;
-                break;
-
-            case '√': 
-                setCalculationMethodValue(inputValue);
-                console.log(` calculation method is ${calculationMethod}`)
-                isFirstInput = false;
-                break; 
             }
             updateDisplay(); 
         }
