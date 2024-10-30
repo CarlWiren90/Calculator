@@ -1,36 +1,37 @@
-import { isFirstInput, firstInput, secondInput, calculationMethod } from "./globalState";
 import { updateDisplay } from "./displaymodule";
+import { firstInput, secondInput, calculationMethod, setFirstInputValue, setSecondInputValue, setCalculationMethodValue } from "./globalState";
+import { calculateResult } from "./calculationmodule";
 
 const buttonNodes:NodeList = document.querySelectorAll('.button');
-let isFirstInput:boolean = true;
-
 let inputValue: string = '';
+let isFirstInput: boolean = true;
 
 
-    buttonNodes.forEach(button => {
-        button.addEventListener('click', (e) => {
-            if (e) {
-                inputValue = (e.target as HTMLButtonElement).value;
-                if (isFirstInput) {
-                    firstInput.push(inputValue);
-                    console.log(`first ${inputValue}`);
-                    updateDisplay();
-                }
-                if (inputValue === '=' || inputValue === '-' || inputValue === '+' || inputValue === 'C' || inputValue === '÷' || inputValue === '√') {
-                    isFirstInput = false;
-                    calculationMethod.push(inputValue);
-                    console.log(`claculation method ${inputValue}`);
-                    updateDisplay();
-
-                }
-                if (!isFirstInput) {
-                    secondInput.push(inputValue);
-                    console.log(`second ${inputValue}`);
-                    updateDisplay();
-                }
+buttonNodes.forEach(button => {
+    button.addEventListener('click', (e) => {
+        if (e) {
+            inputValue = (e.target as HTMLButtonElement).value;
+            if (inputValue === '+') {
+                setCalculationMethodValue(inputValue);
+                console.log(` calculation method is ${calculationMethod}`)
+                isFirstInput = false;
             }
-        })
-    })
 
+            else if (inputValue === '=') {
+                isFirstInput = true;
+                calculateResult();
+            }
 
+            else if (isFirstInput) {
+                setFirstInputValue(inputValue);
+                console.log(`first input is ${firstInput}`);
+            }
 
+            else {
+                setSecondInputValue(inputValue);
+                console.log(`second input is ${secondInput}`);
+            }   
+            updateDisplay(); 
+        }
+    }
+)});

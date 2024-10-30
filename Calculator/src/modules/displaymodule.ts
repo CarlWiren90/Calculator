@@ -1,11 +1,9 @@
-/* import './display.css';
- */import { firstInput, secondInput } from './globalState';
+/* import './display.css';*/
+import { firstInput, secondInput, calculationMethod, result } from './globalState';
 
 const numbers = document.querySelector('.numbers') as HTMLHeadingElement;
 
 export const updateDisplay = () => {
     numbers.innerText = '';
-    firstInput.forEach(element => {
-        numbers.innerText += element;
-    });         
+    numbers.innerText += firstInput + calculationMethod + secondInput + result;        
 }
